@@ -62,7 +62,7 @@ android {
 
     signingConfigs {
         debug {
-           storeFile file("C:/Users/prave/.android/debug.keystore")
+           storeFile file("/Users/avinashsingh/.android/debug.keystore")
         }
         release {
             keyAlias keystoreProperties['keyAlias']

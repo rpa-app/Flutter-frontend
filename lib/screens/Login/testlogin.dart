@@ -4,6 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bharatposters0/global/primarybutton.dart';
 import 'package:bharatposters0/global/searchfeild.dart';
 import 'package:bharatposters0/route/route.gr.dart';
+import 'package:bharatposters0/screens/Notification-view/notification_view.dart';
+import 'package:bharatposters0/utils/authentication/authentication.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -76,9 +78,9 @@ class TestLogin extends StatelessWidget {
                   final userId = responseData['appUserId'];
 
                   await TokenValidity(token, true);
-                  await saveUserId(userId);
-
-                  AutoRouter.of(context).replace(const NotificationViewRoute());
+                  await saveUserId(userId.toString());
+                  await Authentication().configCall();
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const NotificationView()));
                 } else {
                   // Login failed, handle the response
                   print('Login failed: ${response.statusCode}');
