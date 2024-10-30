@@ -24,7 +24,7 @@ class _PartyListDetailViewState extends State<PartyListDetailView> {
       viewModelBuilder: () => PartyListViewModel(),
       builder: (context, viewModel, child) => Scaffold(
         // backgroundColor: const Color.fromARGB(137, 202, 201, 201),
-        backgroundColor: Colors.grey.shade400,
+        // backgroundColor: Colors.grey.shade400,
         appBar: AppBar(
           title: Text(
             "Select Your Party in ${widget.state},",

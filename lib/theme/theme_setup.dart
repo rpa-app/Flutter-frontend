@@ -8,7 +8,7 @@ List<ThemeData> getThemes() {
         colorScheme: ColorScheme(
             brightness: Brightness.light,
             //background colors
-            background: HexColor('#89CAC9C9'),
+            background: HexColor('#FFFFFF'),
             onBackground: HexColor('#1E1E1E'),
             surface: HexColor('#FFFFFF'),
             onSurface: HexColor('#1E1E1E'),

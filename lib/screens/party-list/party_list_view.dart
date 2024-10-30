@@ -28,7 +28,7 @@ class _PartyListViewState extends State<PartyListView> {
         onWillPop: _onWillPop,
         child: Scaffold(
           // backgroundColor: const Color.fromARGB(137, 202, 201, 201),
-          backgroundColor: Colors.grey.shade400,
+          // backgroundColor: Colors.grey.shade400,
           appBar: AppBar(
             title: Text("Select Your State",
                 style: TextStyle(fontSize: 18, color: Colors.black)),

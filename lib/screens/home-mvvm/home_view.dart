@@ -263,7 +263,7 @@ class _HomeViewState extends State<HomeView> {
                   fontFamily: 'Work-Sans', fontWeight: FontWeight.w600)),
           backgroundColor: Colors.white,
         ),
-        backgroundColor: Colors.grey.shade400,
+        // backgroundColor: Colors.grey.shade400,
         // backgroundColor: themeData.colorScheme.background,
         body: SafeArea(
           child: _pages[_currentIndex],

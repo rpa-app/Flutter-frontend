@@ -249,8 +249,15 @@ class _Template_right_1State extends State<Template_right_1> {
       TemplatesViewModel viewModel, VoidCallback onloaded) {
     return !isValidMediaUrl(widget.isPoster, widget.imageUrl)
         ? Container()
-        : Container(
-            decoration: BoxDecoration(color: Colors.white),
+        : Card(
+          color: Colors.green.shade100, // Mint green background color
+          elevation: 8, // Set elevation for the card
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12), // Rounded corners
+          ),
+          margin: EdgeInsets.all(8), // Optional margin for spacing
+          child: Padding(
+            padding: const EdgeInsets.all(8.0), // Add padding within the card
             child: Column(
               children: [
                 Screenshot(
@@ -429,7 +436,7 @@ class _Template_right_1State extends State<Template_right_1> {
                 widget.showCTA ? returnCTA(viewModel, _rebuildUI) : SizedBox(),
               ],
             ),
-          );
+          ));
   }
 
   Widget returnUploadPhoto(
@@ -697,7 +704,7 @@ class _Template_right_1State extends State<Template_right_1> {
   Widget returnCTA(TemplatesViewModel viewModel, VoidCallback onloaded) {
     ThemeData themeData = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: LayoutBuilder(
         builder: (context, constraints) {
           bool isWideScreen = constraints.maxWidth > 600;
