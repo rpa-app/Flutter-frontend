@@ -67,7 +67,6 @@ dependencies:
   transparent_image: ^2.0.1
   device_info_plus: ^9.0.3
   image_cropper: ^5.0.0
-  phone_pe_pg: ^0.0.5
   in_app_update: ^4.2.2
   stacked: ^3.4.1+1
   auto_route: ^7.8.4
