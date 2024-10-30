@@ -216,7 +216,7 @@ class _Template_right_1State extends State<Template_right_1> {
             },
             builder: (context, viewModel, child) => RefreshIndicator(
                 onRefresh: () => viewModel.getImageList(),
-                child: politicalTemplate_id_left1(viewModel, _rebuildUI))),
+                child: politicalTemplate_id_left1(viewModel, _rebuildUI, context))),
         if (_isLoading)
           CustomLoader(
             message: 'Processing Video..',
@@ -246,7 +246,7 @@ class _Template_right_1State extends State<Template_right_1> {
   }
 
   Widget politicalTemplate_id_left1(
-      TemplatesViewModel viewModel, VoidCallback onloaded) {
+      TemplatesViewModel viewModel, VoidCallback onloaded, BuildContext context) {
     return !isValidMediaUrl(widget.isPoster, widget.imageUrl)
         ? Container()
         : Card(

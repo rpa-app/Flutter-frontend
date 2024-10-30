@@ -115,7 +115,7 @@ class _OnboardingDetailsState extends State<OnboardingDetailsView> {
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 child: PrimaryButton(
                   color: themeData.colorScheme.secondary,
-                  label: 'Submit Details',
+                  label: 'Finish Setup',
                   height: 56,
                   isLoading: false,
                   isEnabled: viewModel.isEnabled,

@@ -100,7 +100,9 @@ class _PartyListDetailViewState extends State<PartyListDetailView> {
   Widget _buildPartyTile(BuildContext context, PartyListViewModel viewModel,
       Map<String, String> partyInfo, ThemeData themeData,
       {required bool isGridView}) {
-    return GestureDetector(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0), // Add vertical space between tiles
+      child: GestureDetector(
       onTap: () async {
         String selectedParty =
             partyInfo['partyId']!.toUpperCase().replaceAll('_', '');
@@ -119,7 +121,7 @@ class _PartyListDetailViewState extends State<PartyListDetailView> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.green.shade100,
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
@@ -146,6 +148,6 @@ class _PartyListDetailViewState extends State<PartyListDetailView> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

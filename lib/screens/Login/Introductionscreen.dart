@@ -66,7 +66,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      AutoRouter.of(context).replace(const LoginViewRoute());
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => LoginView()),
+                      );
                     },
                     child: Text("Skip"),
                   ),

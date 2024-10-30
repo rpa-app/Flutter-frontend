@@ -13,7 +13,7 @@ List<ThemeData> getThemes() {
             surface: HexColor('#FFFFFF'),
             onSurface: HexColor('#1E1E1E'),
             //primary colors
-            primary: HexColor('#F97D09'),
+            primary: HexColor('#008000'),
             onPrimary: HexColor('#FFFFFF'),
             primaryContainer: HexColor('#FFDDBD'),
             onPrimaryContainer: HexColor('#F97D09'),

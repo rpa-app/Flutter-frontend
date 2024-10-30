@@ -16,7 +16,7 @@ class _PartyListViewState extends State<PartyListView> {
   bool _isGridView = false;
 
   Future<bool> _onWillPop() async {
-    return true; // Allow the actual pop
+    return false; // Allow the actual pop
   }
 
   @override
@@ -30,6 +30,7 @@ class _PartyListViewState extends State<PartyListView> {
           // backgroundColor: const Color.fromARGB(137, 202, 201, 201),
           // backgroundColor: Colors.grey.shade400,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text("Select Your State",
                 style: TextStyle(fontSize: 18, color: Colors.black)),
             actions: [
@@ -129,7 +130,7 @@ class _PartyListViewState extends State<PartyListView> {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.blueGrey.shade50,
+          color: Colors.green.shade100,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
