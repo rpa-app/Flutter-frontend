@@ -54,7 +54,7 @@ class PhotoBackgroundRemoval {
 
       var appDirectory = await getApplicationDocumentsDirectory();
       File file = File(appDirectory.path + 'dummy_path');
-
+    
       Timer.periodic(const Duration(seconds: 3), (timer) async {
         if (timer.tick == 1) {
           controller.add(processingWidget);
@@ -184,7 +184,7 @@ class PhotoBackgroundRemoval {
     XFile? croppedFile = await cropImage(imageFile);
 
     var request = http.MultipartRequest(
-      'GET', // Change the request method to POST
+      'POST', // Change the request method to POST
       Uri.parse('https://bharatposters.rpaventuresllc.com/removebackground'),
     );
 
@@ -197,8 +197,6 @@ class PhotoBackgroundRemoval {
     final String? token = prefs.getString('token');
     final String? userId = prefs.getString('userId');
 
-    print("deviceif for bg");
-
     request.headers.addAll({
       'token': token ?? '',
       'appUserId': userId ?? '',
@@ -207,17 +205,17 @@ class PhotoBackgroundRemoval {
     try {
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
-
       if (response.statusCode == 200) {
         var responseDataURL = jsonDecode(response.body);
-        String imageURL = responseDataURL["message"];
+        String imageURL = responseDataURL["url"];
         print("succcesfully taken the image");
         return imageURL;
       } else {
+        print(response.statusCode);
         print('Error uploading image. Response: ${response.body}');
       }
     } catch (e) {
-      print('Error uploading image: $e');
+      print('Error uploading image, caught exception: $e');
     }
     return null;
   }
