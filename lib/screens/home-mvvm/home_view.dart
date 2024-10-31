@@ -287,8 +287,13 @@ class _HomeViewState extends State<HomeView> {
   }
 }
 
+class HomeContent extends StatefulWidget {
+  @override
+  _HomeContentState createState() => _HomeContentState();
+}
+
 // Extracted Home content widget for cleaner code
-class HomeContent extends StatelessWidget {
+class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
@@ -326,7 +331,7 @@ class HomeContent extends StatelessWidget {
               imageUrl: viewModel.loadedItems[index],
               premiumStatus: viewModel.premiumStatus,
               showCTA: true,
-              onImageAdded: () {},
+              onImageAdded: () => setState(() {}),
               isPoster: true,
             ),
           );
@@ -354,4 +359,5 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+  
 }
