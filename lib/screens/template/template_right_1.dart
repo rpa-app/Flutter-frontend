@@ -848,46 +848,68 @@ class _Template_right_1State extends State<Template_right_1> {
   }
 
   Future removeBackground(XFile? image, bool? leader) {
-    ThemeData themeData = Theme.of(context);
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return StreamBuilder(
-              stream: PhotoBackgroundRemoval().executeEverything(image),
-              builder: (context, snapshot) {
-                return AlertDialog(
-                  backgroundColor: Colors.white,
-                  title: Text(
-                    'Removing background, please wait..',
-                    textAlign: TextAlign.center,
-                  ),
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: Container(width: 300, child: snapshot.data),
-                        ),
-                      ],
+  ThemeData themeData = Theme.of(context);
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StreamBuilder(
+            stream: PhotoBackgroundRemoval().executeEverything(image),
+            builder: (context, snapshot) {
+              return AlertDialog(
+                backgroundColor: Colors.white,
+                title: Column(
+                  children: [
+                    Text(
+                      'Processing Image',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  actions: [
-                    snapshot.connectionState == ConnectionState.done
-                        ? PrimaryButton(
-                            isEnabled: true,
-                            isLoading: false,
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            label: 'Add Image',
-                            color: themeData.colorScheme.primary,
-                          )
-                        : SizedBox(),
+                    SizedBox(height: 8),
+                    Text(
+                      'We’re removing the background. This may take a few moments.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    ),
                   ],
-                );
-              });
-        });
-  }
+                ),
+                content: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: Container(
+                          width: 300,
+                          child: snapshot.data ?? SizedBox.shrink(),
+                        ),
+                      ),
+                      if (snapshot.connectionState != ConnectionState.done)
+                        CircularProgressIndicator(
+                          color: themeData.colorScheme.primary,
+                          strokeWidth: 2.5,
+                        ),
+                    ],
+                  ),
+                ),
+                actions: [
+                  snapshot.connectionState == ConnectionState.done
+                      ? PrimaryButton(
+                          isEnabled: true,
+                          isLoading: false,
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          label: 'Done',
+                          color: themeData.colorScheme.primary,
+                        )
+                      : SizedBox(),
+                ],
+              );
+            });
+      });
+}
 
   // Future<void> conditionalButtonClick1({
   //   required ScreenshotController controller,

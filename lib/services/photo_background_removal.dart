@@ -23,8 +23,14 @@ class PhotoBackgroundRemoval {
         Container(
           color: Colors.black.withAlpha(150),
         ),
-        CircularProgressIndicator(
-          color: Colors.white,
+        LinearProgressIndicator(
+              backgroundColor: Colors.white.withOpacity(0.3),
+              color: Colors.white,
+            ),
+            SizedBox(height: 8),
+        Text(
+          '',
+          style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ],
     );
@@ -53,7 +59,7 @@ class PhotoBackgroundRemoval {
       int rateLimiter = 1;
 
       var appDirectory = await getApplicationDocumentsDirectory();
-      File file = File(appDirectory.path + 'dummy_path');
+      File file = File('${appDirectory.path}/dummy_path_${DateTime.now().millisecondsSinceEpoch}');
     
       Timer.periodic(const Duration(seconds: 3), (timer) async {
         if (timer.tick == 1) {
