@@ -442,7 +442,7 @@ class _Template_right_1State extends State<Template_right_1> {
   Widget returnUploadPhoto(
       TemplatesViewModel viewModel, VoidCallback onloaded) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal:4),
         child: CustomSecondaryButton(
           showIcon: false,
           leadingIcon: 'Asset/Icons/Download-Icon.svg',
@@ -713,7 +713,7 @@ class _Template_right_1State extends State<Template_right_1> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     flex: 1,
@@ -816,10 +816,10 @@ class _Template_right_1State extends State<Template_right_1> {
               ),
               const SizedBox(height: 12),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    flex: 5,
+                    flex: 4,
                     child: CustomSecondaryButton(
                       showIcon: false,
                       leadingIcon: 'Asset/Icons/Download-Icon.svg',
@@ -837,7 +837,7 @@ class _Template_right_1State extends State<Template_right_1> {
                     ),
                   ),
                   Expanded(
-                      flex: 4, child: returnUploadPhoto(viewModel, onloaded))
+                      flex: 3, child: returnUploadPhoto(viewModel, onloaded))
                 ],
               ),
             ],
