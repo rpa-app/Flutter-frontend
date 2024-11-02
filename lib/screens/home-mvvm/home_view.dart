@@ -305,7 +305,6 @@ class _HomeContentState extends State<HomeContent> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            const SizedBox(height: 36),
             _buildLazyLoadedView(viewModel, themeData),
             const SizedBox(height: 36),
           ],
