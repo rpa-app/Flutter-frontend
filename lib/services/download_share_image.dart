@@ -33,7 +33,7 @@ class DownloadShareImage {
     file.writeAsBytesSync(imageInUnit8List!);
     Share.shareXFiles([XFile('$path/image.png')],
         text:
-            'Get your BJP id Card and daily BJP Posters-Dwonload app now \n App Link: https://play.google.com/store/apps/details?id=com.rpa.election');
+            'Get your BJP id Card and daily BJP Posters-Dwonload app now \n App Link: https://play.google.com/store/apps/details?id=com.bharat.posters');
   }
 
   Future<void> downloadPremiumScreenshot() async {

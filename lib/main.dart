@@ -1,6 +1,8 @@
 import 'package:bharatposters0/route/route.dart';
 import 'package:bharatposters0/screens/Login/Introductionscreen.dart';
 import 'package:bharatposters0/screens/Login/loginview.dart';
+import 'package:bharatposters0/screens/home-mvvm/home_view.dart';
+import 'package:bharatposters0/screens/party-list/party_list_view.dart';
 import 'package:bharatposters0/services/notificationservice.dart';
 import 'package:bharatposters0/theme/theme_setup.dart';
 import 'package:bharatposters0/utils/Singletons/prefs_singleton.dart';
@@ -48,17 +50,15 @@ class _MyAppState extends State<MyApp> {
           themeMode: themeMode,
           theme: regularTheme,
           darkTheme: darkTheme,
-          home: FutureBuilder<bool>(
-            future: _checkIfAuthenticated(),
-            builder: (context, snapshot) {
+          home: FutureBuilder<Widget>(
+            future: _checkUserState(),
+           builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasData && snapshot.data == true) {
-                // User is authenticated, navigate to LoginView
-                return LoginView(); // Or replace this with your actual route
+              } else if (snapshot.hasData) {
+                return snapshot.data!;
               } else {
-                // User is not authenticated, navigate to OnboardingScreen
-                return OnboardingScreen(); // This is your onboarding screen
+                return Center(child: Text("Error occurred"));
               }
             },
           ),
@@ -67,8 +67,24 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Future<bool> _checkIfAuthenticated() async {
+   Future<Widget> _checkUserState() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('isAuthenticated') ?? false;
-  }
+    final String? userId = prefs.getString('userId');
+    final String? token = prefs.getString('token');
+    final String? selectedCategory = prefs.getString('CategorySelected');
+    final bool isOnboarded = prefs.getBool('isOnboarded') ?? false;
+
+    // User is not logged in
+    if (userId == null && token == null) {
+      return OnboardingScreen();
+    } else if (!isOnboarded) {
+      return OnboardingScreen();
+    } else if (isOnboarded && selectedCategory != null) {
+      return HomeView(); // Navigate to HomeView if category is selected
+    } else {
+      return PartyListView(); // Navigate to PartyListView if no category is selected
+    }}
+  //   final prefs = await SharedPreferences.getInstance();
+  //   return prefs.getBool('isAuthenticated') ?? false;
+  // }
 }

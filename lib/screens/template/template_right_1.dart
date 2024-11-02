@@ -56,8 +56,6 @@ class _Template_right_1State extends State<Template_right_1> {
     });
   }
 
-  bool _isLoadingShare = false;
-
   @override
   void initState() {
     super.initState();
@@ -262,7 +260,6 @@ class _Template_right_1State extends State<Template_right_1> {
             padding: const EdgeInsets.all(8.0), // Add padding within the card
             child: Column(
               children: [
-                if (_isLoadingShare) LinearProgressIndicator(),
                 Screenshot(
                   controller: _controller,
                   child: Stack(
@@ -445,7 +442,7 @@ class _Template_right_1State extends State<Template_right_1> {
   Widget returnUploadPhoto(
       TemplatesViewModel viewModel, VoidCallback onloaded) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal:4),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: CustomSecondaryButton(
           showIcon: false,
           leadingIcon: 'Asset/Icons/Download-Icon.svg',
@@ -716,7 +713,7 @@ class _Template_right_1State extends State<Template_right_1> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
                     flex: 1,
@@ -735,7 +732,8 @@ class _Template_right_1State extends State<Template_right_1> {
                           context: context,
                           imageUrl: widget.imageUrl,
                           isTestUser: false,
-                          premiumStatus: widget.premiumStatus,
+                          // premiumStatus: widget.premiumStatus,
+                          premiumStatus: true,
                           isPoster: widget.isPoster,
                           setLoading: setLoading,
                           userController: _userscreenshotController,
@@ -819,37 +817,28 @@ class _Template_right_1State extends State<Template_right_1> {
               ),
               const SizedBox(height: 12),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    flex: 4,
+                    flex: 5,
                     child: CustomSecondaryButton(
                       showIcon: false,
                       leadingIcon: 'Asset/Icons/Download-Icon.svg',
                       onPressed: () async {
-                        setState(() {
-                          _isLoadingShare = true;
-                        });
-                         try {
-                          if (widget.premiumStatus) {
-                            await DownloadShareImage(controller: _controller)
-                                .downloadPremiumScreenshot();
-                          } else {
-                            await DownloadShareImage()
-                                .nonPremiumShare(imageUrl: widget.imageUrl);
-                          }
-                         } finally {
-                            setState(() {
-                              _isLoadingShare = false;
-                            });
-                         }
+                        if (widget.premiumStatus) {
+                          await DownloadShareImage(controller: _controller)
+                              .downloadPremiumScreenshot();
+                        } else {
+                          await DownloadShareImage()
+                              .nonPremiumShare(imageUrl: widget.imageUrl);
+                        }
                       },
                       buttonText: "Share without Photo",
                       buttonColor: Colors.black,
                     ),
                   ),
                   Expanded(
-                      flex: 3, child: returnUploadPhoto(viewModel, onloaded))
+                      flex: 4, child: returnUploadPhoto(viewModel, onloaded))
                 ],
               ),
             ],
@@ -860,68 +849,48 @@ class _Template_right_1State extends State<Template_right_1> {
   }
 
   Future removeBackground(XFile? image, bool? leader) {
-  ThemeData themeData = Theme.of(context);
-  return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return StreamBuilder(
-            stream: PhotoBackgroundRemoval().executeEverything(image),
-            builder: (context, snapshot) {
-              return AlertDialog(
-                backgroundColor: Colors.white,
-                title: Column(
-                  children: [
-                    Text(
-                      'Processing Image',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'We’re removing the background. This may take a few moments.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                    ),
-                  ],
-                ),
-                content: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: Container(
-                          width: 300,
-                          child: snapshot.data ?? SizedBox.shrink(),
-                        ),
-                      ),
-                      if (snapshot.connectionState != ConnectionState.done)
-                        CircularProgressIndicator(
-                          color: themeData.colorScheme.primary,
-                          strokeWidth: 2.5,
-                        ),
-                    ],
+    ThemeData themeData = Theme.of(context);
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StreamBuilder(
+              stream: PhotoBackgroundRemoval().executeEverything(image),
+              builder: (context, snapshot) {
+                return AlertDialog(
+                  backgroundColor: Colors.white,
+                  title: Text(
+                    'Removing background, please wait..',
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                actions: [
-                  snapshot.connectionState == ConnectionState.done
-                      ? PrimaryButton(
-                          isEnabled: true,
-                          isLoading: false,
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          label: 'Done',
-                          color: themeData.colorScheme.primary,
-                        )
-                      : SizedBox(),
-                ],
-              );
-            });
-      });
-}
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Container(width: 300, child: snapshot.data),
+                        ),
+                         if (snapshot.connectionState == ConnectionState.waiting) 
+                    LinearProgressIndicator(),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    snapshot.connectionState == ConnectionState.done
+                        ? PrimaryButton(
+                            isEnabled: true,
+                            isLoading: false,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            label: 'Add Image',
+                            color: themeData.colorScheme.primary,
+                          )
+                        : SizedBox(),
+                  ],
+                );
+              });
+        });
+  }
 
   // Future<void> conditionalButtonClick1({
   //   required ScreenshotController controller,

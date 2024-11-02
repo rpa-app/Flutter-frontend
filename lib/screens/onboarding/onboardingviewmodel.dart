@@ -94,7 +94,7 @@ class OnboardingDetailsViewModel extends ChangeNotifier {
       // "CLIENT_VERSION": "26",
       // "CLIENT_TYPE": "ANDROID",
       // "CLIENT_VERSION_CODE": "79",
-      // "package-name": "com.rpa.election"
+      // "package-name": "com.bharat.posters"
     };
 
     final cleanedName =
@@ -154,7 +154,7 @@ class OnboardingDetailsViewModel extends ChangeNotifier {
       // "CLIENT_VERSION": "22",
       // "CLIENT_TYPE": "ANDROID",
       // "CLIENT_VERSION_CODE": "79",
-      // "package-name": "com.rpa.election"
+      // "package-name": "com.bharat.posters"
     };
 
     final url =

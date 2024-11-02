@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:510009434821:android:186ef5f0a5d329158246ac",
         "android_client_info": {
-          "package_name": "com.rpa.election"
+          "package_name": "com.bharat.posters"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "510009434821-478r62hrdrnr4mkfot87qqc4cls1pfon.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.rpa.election",
+            "package_name": "com.bharat.posters",
             "certificate_hash": "78428d51fa21ac4a01951475a831de1f5f04a628"
           }
         },

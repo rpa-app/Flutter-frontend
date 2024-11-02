@@ -18,8 +18,8 @@ class UserImage {
           await ImageCropper().cropImage(sourcePath: image!.path, uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Crop Image',
-          toolbarWidgetColor: Colors.white,
-          toolbarColor: themeData.colorScheme.primary,
+          toolbarWidgetColor: Colors.black,
+          toolbarColor: Colors.green.shade200,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
         ),

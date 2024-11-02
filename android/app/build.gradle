@@ -25,8 +25,6 @@ def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-} else {
-    throw new RuntimeException("key.properties file not found in the root directory. Please ensure it exists and is named correctly.")
 }
 
 apply plugin: 'com.android.application'
@@ -34,8 +32,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    
-    // namespace "com.rpa.election"
+    // namespace "com.bharat.posters"
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
@@ -54,7 +51,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.rpa.election"
+        applicationId "com.bharat.posters"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 24
@@ -65,12 +62,12 @@ android {
 
     signingConfigs {
         debug {
-           storeFile file("/Users/avinashsingh/.android/debug.keystore")
+           storeFile file("C:/Users/prave/.android/debug.keystore")
         }
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile file("/Users/avinashsingh/my-release-key.jks") //keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
             storePassword keystoreProperties['storePassword']
         }
     }

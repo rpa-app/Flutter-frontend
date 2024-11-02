@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
+import 'package:bharatposters0/global/CustomSecondaryLoader.dart';
 import 'package:bharatposters0/route/route.gr.dart';
 import 'package:bharatposters0/screens/Notification-view/notification_view.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +9,24 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Authentication {
+
   Future<void> signInWithGoogle(BuildContext context) async {
+
+     showDialog(
+    context: context,
+    barrierDismissible: false, // Prevent dismissal by tapping outside
+    builder: (BuildContext context) {
+      return Dialog(
+        backgroundColor: Colors.transparent, // Transparent background
+        child: CustomLoader(), // Use the loading widget
+      );
+    },
+  );
     final GoogleSignIn googleSignIn =
         GoogleSignIn(scopes: ['email', 'profile']);
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
-
+    Navigator.of(context).pop();
     if (googleSignInAccount == null) {
       print('Sign-in aborted by user or failed.');
       return;
@@ -59,7 +72,7 @@ class Authentication {
         'https://bharatposters.rpaventuresllc.com/signInUser?access_token=$idToken');
     final headers = <String, String>{
       'Content-Type': 'application/json',
-      "package-name": "com.rpa.election"
+      "package-name": "com.bharat.posters"
     };
 
     try {

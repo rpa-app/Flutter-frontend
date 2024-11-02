@@ -375,7 +375,7 @@ class HomeViewModel extends BaseViewModel implements Initialisable {
                   onTap: () async {
                     Navigator.pop(context);
                     final Uri url = Uri.parse(
-                        'https://play.google.com/store/apps/details?id=com.rpa.election');
+                        'https://play.google.com/store/apps/details?id=com.bharat.posters');
                     if (!await launchUrl(url,
                         mode: LaunchMode.externalApplication)) {
                       throw Exception('Could not launch $url');
