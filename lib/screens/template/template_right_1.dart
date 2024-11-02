@@ -56,6 +56,8 @@ class _Template_right_1State extends State<Template_right_1> {
     });
   }
 
+  bool _isLoadingShare = false;
+
   @override
   void initState() {
     super.initState();
@@ -260,6 +262,7 @@ class _Template_right_1State extends State<Template_right_1> {
             padding: const EdgeInsets.all(8.0), // Add padding within the card
             child: Column(
               children: [
+                if (_isLoadingShare) LinearProgressIndicator(),
                 Screenshot(
                   controller: _controller,
                   child: Stack(
@@ -824,13 +827,22 @@ class _Template_right_1State extends State<Template_right_1> {
                       showIcon: false,
                       leadingIcon: 'Asset/Icons/Download-Icon.svg',
                       onPressed: () async {
-                        if (widget.premiumStatus) {
-                          await DownloadShareImage(controller: _controller)
-                              .downloadPremiumScreenshot();
-                        } else {
-                          await DownloadShareImage()
-                              .nonPremiumShare(imageUrl: widget.imageUrl);
-                        }
+                        setState(() {
+                          _isLoadingShare = true;
+                        });
+                         try {
+                          if (widget.premiumStatus) {
+                            await DownloadShareImage(controller: _controller)
+                                .downloadPremiumScreenshot();
+                          } else {
+                            await DownloadShareImage()
+                                .nonPremiumShare(imageUrl: widget.imageUrl);
+                          }
+                         } finally {
+                            setState(() {
+                              _isLoadingShare = false;
+                            });
+                         }
                       },
                       buttonText: "Share without Photo",
                       buttonColor: Colors.black,
