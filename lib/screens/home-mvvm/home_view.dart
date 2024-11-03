@@ -305,7 +305,6 @@ class _HomeContentState extends State<HomeContent> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            const SizedBox(height: 36),
             _buildLazyLoadedView(viewModel, themeData),
             const SizedBox(height: 36),
           ],
@@ -341,23 +340,35 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Widget _buildLoadingIndicator(ThemeData themeData) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Center(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center, // Centers content vertically
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircularProgressIndicator(
-            color: themeData.colorScheme.outline,
-            strokeWidth: 2,
+          // Animated Loading Spinner or Custom Icon Animation
+          SizedBox(
+            height: 40,
+            width: 40,
+            child: LinearProgressIndicator(
+              color: themeData.colorScheme.primary,
+            ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(height: 16),
+          // Custom Text Message with Styling
           Text(
-            'Loading..',
-            style: themeData.textTheme.bodyLarge,
+            'Curating the best posters just for you...',
+            textAlign: TextAlign.center,
+            style: themeData.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: themeData.colorScheme.primary,
+            ),
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
   
 }
