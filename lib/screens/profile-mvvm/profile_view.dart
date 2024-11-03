@@ -423,7 +423,7 @@ class _ProfileViewState extends State<ProfileView> {
         //     ),
         //   ],
         // ),
-        backgroundColor: Colors.grey.shade200,
+        backgroundColor: Colors.green.shade100,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

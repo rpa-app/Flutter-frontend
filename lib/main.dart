@@ -79,8 +79,8 @@ class _MyAppState extends State<MyApp> {
       return OnboardingScreen();
     } else if (!isOnboarded) {
       return OnboardingScreen();
-    } else if (isOnboarded && selectedCategory != null) {
-      return HomeView(); // Navigate to HomeView if category is selected
+    // } else if (isOnboarded && selectedCategory != null) {
+    //   return HomeView(); // Navigate to HomeView if category is selected
     } else {
       return PartyListView(); // Navigate to PartyListView if no category is selected
     }}
