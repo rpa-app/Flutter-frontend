@@ -400,29 +400,29 @@ class _ProfileViewState extends State<ProfileView> {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       viewModelBuilder: () => ProfileViewModel(),
       builder: (context, viewModel, child) => Scaffold(
-        appBar: AppBar(
-          title: Text('Profile', style: themeData.textTheme.headline6),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.pop(context),
-          ),
-          actions: [
-            IconButton(
-              icon:
-                  SvgPicture.asset('Asset/Icons/Settings-Icon.svg', width: 28),
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>
-                      SettingsView(), // replace with your Settings page widget
-                ),
-              ),
+        // appBar: AppBar(
+        //   title: Text('Profile', style: themeData.textTheme.headline6),
+        //   backgroundColor: Colors.white,
+        //   elevation: 0,
+        //   leading: IconButton(
+        //     icon: Icon(Icons.arrow_back, color: Colors.black),
+        //     onPressed: () => Navigator.pop(context),
+        //   ),
+        //   actions: [
+        //     IconButton(
+        //       icon:
+        //           SvgPicture.asset('Asset/Icons/Settings-Icon.svg', width: 28),
+        //       onPressed: () => Navigator.of(context).push(
+        //         MaterialPageRoute(
+        //           builder: (context) =>
+        //               SettingsView(), // replace with your Settings page widget
+        //         ),
+        //       ),
 
-              // onPressed: () => AutoRouter.of(context).push(SettingsViewRoute()),
-            ),
-          ],
-        ),
+        //       // onPressed: () => AutoRouter.of(context).push(SettingsViewRoute()),
+        //     ),
+        //   ],
+        // ),
         backgroundColor: Colors.grey.shade200,
         body: SingleChildScrollView(
           child: Column(
