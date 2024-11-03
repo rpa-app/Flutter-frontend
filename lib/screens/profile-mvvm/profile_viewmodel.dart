@@ -109,15 +109,24 @@ class ProfileViewModel extends BaseViewModel {
               builder: (context, snapshot) {
                 return AlertDialog(
                   backgroundColor: Colors.white,
-                  title: Text(
-                    'Removing background, please wait..',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Work-Sans',
-                        fontSize: 20,
-                        color: themeData.colorScheme.onSurface),
-                  ),
+                  title: Column(
+                  children: [
+                    Text(
+                      'Processing Image',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'We’re removing the background. This may take a few moments.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    ),
+                  ],
+                ),
                   content: SingleChildScrollView(
                     child: ListBody(
                       children: [
@@ -125,6 +134,8 @@ class ProfileViewModel extends BaseViewModel {
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Container(width: 300, child: snapshot.data),
                         ),
+                        if (snapshot.connectionState == ConnectionState.waiting) 
+                    LinearProgressIndicator(),
                       ],
                     ),
                   ),
@@ -134,7 +145,7 @@ class ProfileViewModel extends BaseViewModel {
                             isEnabled: true,
                             isLoading: false,
                             onTap: () async {
-                              AutoRouter.of(context).pop();
+                               Navigator.pop(context);
                             },
                             label: 'Add Image',
                             color: themeData.colorScheme.primary,
