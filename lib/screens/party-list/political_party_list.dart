@@ -27,8 +27,8 @@ class _PartyListDetailViewState extends State<PartyListDetailView> {
         // backgroundColor: Colors.grey.shade400,
         appBar: AppBar(
           title: Text(
-            "Select Your Party in ${widget.state},",
-            style: TextStyle(fontSize: 18, color: Colors.black),
+            "${widget.state}",
+            style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
           ),
           actions: [
             IconButton(
