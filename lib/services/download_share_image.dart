@@ -81,6 +81,6 @@ class DownloadShareImage {
     file.writeAsBytesSync(bytes);
     await Share.shareXFiles([XFile('$path/image.jpg')],
         text:
-            'अभी डाउनलोड करें: https://play.google.com/store/apps/details?id=com.govmatter.political_poster');
+            'अभी डाउनलोड करें: https://play.google.com/store/apps/details?id=com.bharat.posters');
   }
 }
