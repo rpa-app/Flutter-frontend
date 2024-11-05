@@ -8,18 +8,22 @@ class PartyListViewModel extends BaseViewModel {
   final Prefs _prefs = Prefs.instance;
 
   // Fetch state information from the config
-  Future<List<Map<String, String>>> fetchStateInfos() async {
+  Future<List<Map<String, dynamic>>> fetchStateInfos() async {
     try {
       String? configJson = _prefs.getString('configResponse');
       if (configJson != null) {
         Map<String, dynamic> config =
             jsonDecode(utf8.decode(configJson.codeUnits));
         List<dynamic> stateInfos = config['statePartyInfo'];
-        List<Map<String, String>> stateInfoList = stateInfos.map((info) {
+        List<Map<String, dynamic>> stateInfoList = stateInfos.map((info) {
           return {
             'state': info['state'] as String,
             'name': info['referedName'] as String,
             'regionalName': info['regionalName'] as String,
+            'stateTopLeaderImageUrls': (info['stateTopLeaderImageUrls'] as List<dynamic>?)
+                  ?.map((url) => url as String)
+                  .toList() ??
+              [],
           };
         }).toList();
         return stateInfoList;
